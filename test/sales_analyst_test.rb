@@ -77,5 +77,17 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 3, @sa.top_days_by_invoice_count.count
   end
 
+  def test_merchants_with_only_one_item
+    assert_instance_of Array, @sa.merchants_with_only_one_item
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item[0]
+    assert_equal 9, @sa.merchants_with_only_one_item.count
+  end
+
+  def test_merchants_with_only_one_item_registered_in_a_month
+    assert_instance_of Array, @se.merchants_with_only_one_item_registered_in_a_month
+    assert_instance_of Merchant, @se.merchants_with_only_one_item_registerd_in_a_month
+    assert_equal 5, @sa.merchants_with_only_one_item_registed_in_a_month
+  end
+
 
 end

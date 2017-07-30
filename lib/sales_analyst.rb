@@ -135,4 +135,17 @@ class SalesAnalyst
     end
   end
 
+  def merchants_with_only_one_item
+    @se.merchants.all.find_all do |merchant|
+      merchant.items.count == 1
+    end
+  end
+
+  def merchants_with_only_item_registerd_in_a_month
+    @se.merchants.all.find_all
+
+  end
+
+
+
 end
