@@ -3,6 +3,7 @@ require_relative '../lib/sales_analyst'
 require 'minitest/autorun'
 require 'minitest/emoji'
 require 'bigdecimal'
+require 'pry'
 
 class SalesAnalystTest < Minitest::Test
   def setup
@@ -26,7 +27,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_items_per_merchant_standard_deviation
-    assert_equal 1.75, @sa.average_items_per_merchant_standard_deviation
+    assert_equal 1.76, @sa.average_items_per_merchant_standard_deviation
   end
 
   def test_merchants_with_high_item_count
@@ -54,7 +55,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_invoices_per_merchant_standard_deviation
-    assert_equal 0.89, @sa.average_invoices_per_merchant_standard_deviation
+    assert_equal 0.9, @sa.average_invoices_per_merchant_standard_deviation
   end
 
   def test_top_merchants_by_invoice_count
@@ -64,7 +65,7 @@ class SalesAnalystTest < Minitest::Test
 
   def test_bottom_merchants_by_invoice_count
     assert_instance_of Array, @sa.top_merchants_by_invoice_count
-    assert_instance_of Merchant, @sa.top_merchants_by_invoice_count[0]
+    assert_equal 2, @sa.top_merchants_by_invoice_count[0]
   end
 
   def test_turn_date_to_day
@@ -72,10 +73,10 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_top_days_by_invoice_count
-    skip
     assert_instance_of Array, @sa.top_days_by_invoice_count
-    assert_equal 3, @sa.top_days_by_invoice_count.count
+    assert_equal "Sunday", @sa.top_days_by_invoice_count[0]
   end
+
 
   def test_merchants_with_only_one_item
     assert_instance_of Array, @sa.merchants_with_only_one_item
@@ -88,6 +89,5 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of Merchant, @se.merchants_with_only_one_item_registerd_in_a_month
     assert_equal 5, @sa.merchants_with_only_one_item_registed_in_a_month
   end
-
 
 end
