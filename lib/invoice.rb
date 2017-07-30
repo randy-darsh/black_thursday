@@ -37,7 +37,20 @@ class Invoice
     @invoice_repo.sales_engine.customers.find_by_id(@customer_id)
   end
 
-  def paid_in_full?
+  def is_paid_in_full?
+    transactions = @invoice_repo.sales_engine.transactions.find_all_by_invoice_id(@id)
+    transactions.each do |transaction|
+      return true if transaction.result == "success"
+    end
+    false
+  end
+
+  def total
+    invoice_items = invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
+    total = invoice_items.inject(0) do |result, invoice_item|
+      # binding.pry
+      result += (invoice_item.unit_price * invoice_item.quantity)
+    end
   end
 
 
