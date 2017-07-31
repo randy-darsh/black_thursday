@@ -220,31 +220,42 @@ class SalesAnalyst
     end
   end
 
-  def merchants_with_only_one_item_registered_in_month(month)
-    merchants = merchants.find_all do |merchant|
-      invoices = merchant.invoices.find_all do |invoice|
-        # binding.pry
 
-        invoice.created_at.strftime("%B") == month
+  def total_revenue_by_date(date)
+    invoices_by_date = []
+    @se.invoices.all.each do |invoice|
+      if invoice.created_at.strftime("%x") == date.strftime("%x")
+        invoices_by_date << invoice
       end
-          # binding.pry
-      invoices.count == 1
     end
+    invoices_by_date.inject(0) do |sum, invoice|
+      sum += invoice.total
+    end
+  end
 
-    merchants
 
+  def top_revenue_earners(num = 20)
+    invoices = {}
+    @se.merchants.all.map do |merchant|
+      invoices[merchant] = merchant.revenue_for_merchant
+    end
+    sorted_invoices = invoices.sort_by do |merchant, total_revenue|
+      total_revenue.to_f
+    end
+    sorted_invoices.reverse!
+    merchants = sorted_invoices[0..(num-1)].map do |array|
+      array[0]
+    end
+  end
 
+  def merchants_ranked_by_revenue
+    top_revenue_earners(@se.merchants.all.count)
+  end
 
-    # merchants_with_only_one_item.find_all do |merchant|
-    #   merchant.items.find_all do |
-
-    # merchants = @se.merchants.all.find_all do |merchant|
-    #   items = merchant.items.find_all do |item|
-    #     item.created_at.strftime("%B") == month
-    #   end
-    #   items.count == 1
-    # end
-    # merchants
+  def merchants_with_pending_invoices
+    @se.merchants.all.find_all do |merchant|
+      merchant.has_pending_invoices?
+    end
   end
 
 
