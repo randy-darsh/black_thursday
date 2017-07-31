@@ -144,6 +144,10 @@ class SalesAnalyst
     set.count / total_merchant_count
   end
 
+  def turn_date_to_month(date)
+
+  end
+
   def turn_date_to_day(date)
     date = Date.parse(date)
     date.strftime("%A")
@@ -210,10 +214,40 @@ class SalesAnalyst
     end
   end
 
-  def merchants_with_only_item_registerd_in_a_month
-    @se.merchants.all.find_all
-
+  def item_date
+    @se.items.all.map do |item|
+      item.created_at.strftime("%A")
+    end
   end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    merchants = merchants.find_all do |merchant|
+      invoices = merchant.invoices.find_all do |invoice|
+        # binding.pry
+
+        invoice.created_at.strftime("%B") == month
+      end
+          # binding.pry
+      invoices.count == 1
+    end
+
+    merchants
+
+
+
+    # merchants_with_only_one_item.find_all do |merchant|
+    #   merchant.items.find_all do |
+
+    # merchants = @se.merchants.all.find_all do |merchant|
+    #   items = merchant.items.find_all do |item|
+    #     item.created_at.strftime("%B") == month
+    #   end
+    #   items.count == 1
+    # end
+    # merchants
+  end
+
+
 
 
 
