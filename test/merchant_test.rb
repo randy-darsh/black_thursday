@@ -45,6 +45,13 @@ class MerchantTest < Minitest::Test
     assert_equal 3, @merchant.customers.count
   end
 
+  def test_revenue_for_merchant
+    merchant = @se.merchants.find_by_id(12334112)
+
+    assert_equal 23090, merchant.revenue_for_merchant
+
+  end
+
 
 
 end

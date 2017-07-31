@@ -48,10 +48,10 @@ class Invoice
   def total
     invoice_items = invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
     total = invoice_items.inject(0) do |result, invoice_item|
-      # binding.pry
       result += (invoice_item.unit_price * invoice_item.quantity)
     end
   end
+
 
 
 end

@@ -87,14 +87,31 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_only_one_item_registered_in_a_month
+    skip
     assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("January")
     assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January")
     assert_equal 5, @sa.merchants_with_only_one_item_registered_in_month("January")
   end
 
-  # def test_revenue_by_merchant
-  #   assert_equal
-  #
-  # end
+  def test_revenue_by_date
+    date = Time.parse("2009-02-07")
+    assert_equal 21067.77, @sa.total_revenue_by_date(date)
+  end
+
+  def test_top_revenue_earners
+    assert_equal 5, @sa.top_revenue_earners(5).count
+    assert_instance_of Merchant, @sa.top_revenue_earners(5)[0]
+    assert_instance_of Array, @sa.top_revenue_earners(5)
+  end
+
+  def test_merchant_ranked_by_revenue
+    assert_instance_of Merchant, @sa.merchants_ranked_by_revenue[0]
+    assert_instance_of Array, @sa.merchants_ranked_by_revenue
+  end
+
+  def test_merchants_with_pending_invoices
+    assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
+    assert_instance_of Array, @sa.merchants_with_pending_invoices
+  end
 
 end
