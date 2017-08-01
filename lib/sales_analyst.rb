@@ -161,9 +161,9 @@ class SalesAnalyst
     mean = average_sales_per_day
     days = @day_count.find_all do |day, num|
       (num - mean) > average_sales_per_day_standard_deviation
-    end
-    days.find do |item|
-      item
+    end.flatten
+    days.select.with_index do |item, index|
+     index.even?
     end
   end
 
@@ -252,7 +252,7 @@ class SalesAnalyst
     @se.merchants.all.find_all do |merchant|
       merchant.has_pending_invoices?
     end
-    
+
   end
 
   def merchants_with_only_one_item_registered_in_month(month)
