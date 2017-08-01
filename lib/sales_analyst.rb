@@ -273,6 +273,7 @@ class SalesAnalyst
     most_sold_item = Hash.new(0)
     merchant = @se.merchants.find_by_id(merch_id)
 
+
     merchant.succesful_invoices.map do |invoice|
       invoice.invoice_items.map do |invoice_item|
         most_sold_item[invoice_item.item_id] += invoice_item.quantity

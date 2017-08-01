@@ -35,24 +35,8 @@ class Merchant
   end
 
   def has_pending_invoices?
-    transactions_per_invoice = invoices.map do |invoice|
-      invoice.transactions
-    end
-
-    transactions_per_invoice.map! do |transaction_per_invoice|
-      transaction_per_invoice.each do |transaction|
-        transaction.result != "success"
-      end
-    end
-
-    pending = transactions.any? do |transaction|
-      transaction.result != "success"
-    end
-
-    if pending == true
-      return true
-    else
-      false
+    invoices.any? do |invoice|
+      invoice.is_pending?
     end
   end
 
@@ -73,6 +57,26 @@ class Merchant
       false
     end
   end
+
+  # transactions_per_invoice = invoices.map do |invoice|
+  #   invoice.transactions
+  # end
+  #
+  # transactions_per_invoice.map! do |transaction_per_invoice|
+  #   transaction_per_invoice.each do |transaction|
+  #     transaction_per_invoice.delete(transaction) if transaction.result == "success"
+  #   end
+  # end
+  #
+  # pending = transactions.any? do |transaction|
+  #   transaction.result != "success"
+  # end
+  #
+  # if pending == true
+  #   return true
+  # else
+  #   false
+  # end
 
 
 

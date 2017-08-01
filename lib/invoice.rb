@@ -52,9 +52,18 @@ class Invoice
     end
   end
 
+
+  def is_pending?
+    transactions.any? do |transaction|
+      transaction != "success"
+    end
+  end
+
+
   def invoice_items
     @invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(id)
   end
+
 
 
 
