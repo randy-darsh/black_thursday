@@ -129,7 +129,6 @@ class SalesAnalystTest < Minitest::Test
 
   def test_most_sold_item_for_merchant_returns_the_most_sold_item
     assert_instance_of Item, @sa.most_sold_item_for_merchant(12334105)
-
   end
 
 end
