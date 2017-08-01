@@ -52,6 +52,11 @@ class Invoice
     end
   end
 
+  def invoice_items
+    @invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(id)
+  end
+
+
 
 
 end
