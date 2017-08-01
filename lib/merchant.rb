@@ -52,7 +52,6 @@ class Merchant
     else
       false
     end
-
   end
 
   def revenue_for_merchant
@@ -73,6 +72,6 @@ class Merchant
     end
   end
 
-  def 
+  
 
 end

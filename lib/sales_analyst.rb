@@ -262,14 +262,19 @@ class SalesAnalyst
     @se.merchants.all.find_all do |merchant|
       merchant.one_invoice_per_month?(month)
     end
+  end
 
+  def revenue_by_merchant(id)
+    merchant = @se.merchants.find_by_id(id)
+    merchant.revenue_for_merchant
+  end
 
+  def most_sold_item_for_merchant(merch_id)
+    merchant = @se.merchants.find_by_id(id)
+    items = merchant.items
 
-    # @se.merchants.all.map do |merchant|
-    #   invoices << merchant.invoices
-    # end
-    # binding.pry
-    # return nil
+    merchant.invoice_items
+
   end
 
 
