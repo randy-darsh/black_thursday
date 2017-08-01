@@ -8,6 +8,7 @@ class InvoiceItem
               :updated_at
 
   def initialize(invoice_items, invoice_items_repo)
+    @invoice_items_repo = invoice_items_repo
     @invoice_items  = invoice_items
     @id             = invoice_items[:id].to_i
     @item_id        = invoice_items[:item_id].to_i

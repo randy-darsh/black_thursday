@@ -270,11 +270,52 @@ class SalesAnalyst
   end
 
   def most_sold_item_for_merchant(merch_id)
+    most_sold_item = Hash.new(0)
+    merchant = @se.merchants.find_by_id(merch_id)
 
+
+    merchant.succesful_invoices.map do |invoice|
+      invoice.invoice_items.map do |invoice_item|
+        most_sold_item[invoice_item.item_id] += invoice_item.quantity
+      end
+    end
+    pass_most_sold_item(most_sold_item)
   end
 
+  def best_item_for_merchant(merch_id)
+    best_item = Hash.new(0)
+    merchant = @se.merchants.find_by_id(merch_id)
 
+    merchant.succesful_invoices.map do |invoice|
+      invoice.invoice_items.map do |invoice_item|
+        best_item[invoice_item.item_id] += invoice_item.unit_price*invoice_item.quantity
+      end
+    end
+    find_best_item(best_item)
+  end
 
+  def find_best_item(best_items)
+    best_item = best_items.max_by do |item|
+      item[1]
+    end
+    @se.items.find_by_id(best_item[0])
+  end
 
+  def get_most_sold_items(item_ids)
+    item_ids.map do |item|
+      @se.items.find_by_id(item[0])
+    end
+  end
+
+  def pass_most_sold_item(hash)
+    most_sold_item_hash = hash.sort_by do |high_group|
+      high_group[1]
+    end
+    best_items = most_sold_item_hash[-1]
+    items = most_sold_item_hash.find_all do |item|
+      item[1] == best_items[1]
+    end
+    get_most_sold_items(items)
+  end
 
 end
