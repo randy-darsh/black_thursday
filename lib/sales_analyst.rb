@@ -270,10 +270,6 @@ class SalesAnalyst
   end
 
   def most_sold_item_for_merchant(merch_id)
-    merchant = @se.merchants.find_by_id(id)
-    items = merchant.items
-
-    merchant.invoice_items
 
   end
 
