@@ -110,8 +110,26 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_pending_invoices
+    skip
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
     assert_instance_of Array, @sa.merchants_with_pending_invoices
+  end
+
+  def test_merchants_with_only_one_item_registered_in_month
+    skip
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March")[0]
+    assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("March")
+    assert_equal 10, @sa.merchants_with_only_one_item_registered_in_month("March").count
+  end
+
+  def test_revenue_for_merchant
+    skip
+    assert_equal 23000, @sa.revenue_by_merchant(12334105)
+  end
+
+  def test_most_sold_item_for_merchant_returns_the_most_sold_item
+    assert_instance_of Item, @sa.most_sold_item_for_merchant(12334105)
+
   end
 
 end

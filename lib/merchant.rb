@@ -2,12 +2,14 @@
 class Merchant
 
   attr_reader :id,
-              :name
+              :name,
+              :created_at
 
   def initialize(merch_data, merch_repo)
     @id         = merch_data[:id].to_i
     @name       = merch_data[:name]
     @merch_repo = merch_repo
+    @created_at = Time.parse(merch_data[:created_at].to_s)
   end
 
   def items
@@ -52,7 +54,6 @@ class Merchant
     else
       false
     end
-
   end
 
   def revenue_for_merchant
@@ -60,5 +61,19 @@ class Merchant
       sum += invoice.total
     end
   end
+
+  def one_invoice_per_month?(month)
+    invoices_in_month = invoices.find_all do |invoice|
+      invoice.created_at.strftime("%B") == month
+    end
+
+    if invoices_in_month.count == 1
+      return true
+    else
+      false
+    end
+  end
+
+
 
 end
