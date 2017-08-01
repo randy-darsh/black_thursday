@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require_relative '../lib/sales_engine'
 require 'bigdecimal'
 require 'time'

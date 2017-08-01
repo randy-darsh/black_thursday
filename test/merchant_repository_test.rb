@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require_relative '../lib/merchant_repository'
 require_relative '../lib/sales_engine'
 require 'csv'

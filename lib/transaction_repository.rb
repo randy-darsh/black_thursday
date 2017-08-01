@@ -47,7 +47,7 @@ class TransactionRepository
 
   def find_all_unsuccessful_transactions
     @all.find_all do |transaction|
-      transaction.result != :success  
+      transaction.result != :success
     end
   end
 

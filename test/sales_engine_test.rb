@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'bigdecimal'
 require_relative '../lib/sales_engine'
 require 'csv'

@@ -284,7 +284,8 @@ class SalesAnalyst
 
     merchant.succesful_invoices.map do |invoice|
       invoice.invoice_items.map do |invoice_item|
-        best_item[invoice_item.item_id] += invoice_item.unit_price*invoice_item.quantity
+        best_item[invoice_item.item_id] +=
+        invoice_item.unit_price*invoice_item.quantity
       end
     end
     find_best_item(best_item)

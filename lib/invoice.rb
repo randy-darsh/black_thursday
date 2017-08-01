@@ -23,7 +23,8 @@ class Invoice
   end
 
   def items
-    invoice_items = @invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
+    invoice_items =
+    @invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
     items = invoice_items.map do |invoice_item|
       @invoice_repo.sales_engine.items.find_by_id(invoice_item.item_id)
     end
@@ -38,7 +39,6 @@ class Invoice
   end
 
   def is_paid_in_full?
-    # transactions = @invoice_repo.sales_engine.transactions.find_all_by_invoice_id(@id)
     transactions.each do |transaction|
       return true if transaction.result == "success"
     end
@@ -46,7 +46,8 @@ class Invoice
   end
 
   def total
-    invoice_items = invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
+    invoice_items =
+    invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
     total = invoice_items.inject(0) do |result, invoice_item|
       result += (invoice_item.unit_price * invoice_item.quantity)
     end

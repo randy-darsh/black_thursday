@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require_relative '../lib/transaction_repository'
 require 'minitest/autorun'
 require 'minitest/emoji'
