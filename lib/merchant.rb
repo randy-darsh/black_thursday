@@ -2,12 +2,14 @@
 class Merchant
 
   attr_reader :id,
-              :name
+              :name,
+              :created_at
 
   def initialize(merch_data, merch_repo)
     @id         = merch_data[:id].to_i
     @name       = merch_data[:name]
     @merch_repo = merch_repo
+    @created_at = Time.parse(merch_data[:created_at].to_s)
   end
 
   def items
@@ -72,6 +74,6 @@ class Merchant
     end
   end
 
-  
+
 
 end
