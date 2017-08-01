@@ -258,6 +258,20 @@ class SalesAnalyst
     end
   end
 
+  def merchants_with_only_one_item_registered_in_month(month)
+    @se.merchants.all.find_all do |merchant|
+      merchant.one_invoice_per_month?(month)
+    end
+
+
+
+    # @se.merchants.all.map do |merchant|
+    #   invoices << merchant.invoices
+    # end
+    # binding.pry
+    # return nil
+  end
+
 
 
 

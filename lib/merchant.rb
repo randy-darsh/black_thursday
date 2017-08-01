@@ -61,4 +61,18 @@ class Merchant
     end
   end
 
+  def one_invoice_per_month?(month)
+    invoices_in_month = invoices.find_all do |invoice|
+      invoice.created_at.strftime("%B") == month
+    end
+
+    if invoices_in_month.count == 1
+      return true
+    else
+      false
+    end
+  end
+
+  def 
+
 end

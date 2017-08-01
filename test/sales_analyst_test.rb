@@ -110,8 +110,19 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_pending_invoices
+    skip
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
     assert_instance_of Array, @sa.merchants_with_pending_invoices
   end
 
+  def test_merchants_with_only_one_item_registered_in_month
+    skip
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March")[0]
+    assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("March")
+    assert_equal 10, @sa.merchants_with_only_one_item_registered_in_month("March").count
+  end
+
+  def test_revenue_for_merchant
+
+  end
 end
