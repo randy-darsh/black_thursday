@@ -25,26 +25,26 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_items_per_merchant
-    assert_equal 0.82, @sa.average_items_per_merchant
+    assert_equal 2.88, @sa.average_items_per_merchant
   end
 
   def test_average_items_per_merchant_standard_deviation
-    assert_equal 1.76, @sa.average_items_per_merchant_standard_deviation
+    assert_equal 3.26, @sa.average_items_per_merchant_standard_deviation
   end
 
   def test_merchants_with_high_item_count
     assert_instance_of Array, @sa.merchants_with_high_item_count
-    assert_equal 2, @sa.merchants_with_high_item_count.count
+    assert_equal 52, @sa.merchants_with_high_item_count.count
   end
 
   def test_average_item_price_for_merchant
     assert_instance_of BigDecimal, @sa.average_item_price_for_merchant(12334105)
-    assert_equal 29.99, @sa.average_item_price_for_merchant(12334105).to_f.round(2)
+    assert_equal 16.66, @sa.average_item_price_for_merchant(12334105).to_f.round(2)
   end
 
   def test_average_average_price_per_merchant
     assert_instance_of BigDecimal, @sa.average_average_price_per_merchant
-    assert_equal 75.82, @sa.average_average_price_per_merchant.to_f.round(2)
+    assert_equal 350.29, @sa.average_average_price_per_merchant.to_f.round(2)
   end
 
   def test_golden_items
@@ -53,11 +53,11 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_invoices_per_merchant
-    assert_equal 10.0, @sa.average_invoices_per_merchant
+    assert_equal 10.49, @sa.average_invoices_per_merchant
   end
 
   def test_average_invoices_per_merchant_standard_deviation
-    assert_equal 0.9, @sa.average_invoices_per_merchant_standard_deviation
+    assert_equal 3.29, @sa.average_invoices_per_merchant_standard_deviation
   end
 
   def test_top_merchants_by_invoice_count
@@ -76,14 +76,14 @@ class SalesAnalystTest < Minitest::Test
 
   def test_top_days_by_invoice_count
     assert_instance_of Array, @sa.top_days_by_invoice_count
-    assert_equal "Sunday", @sa.top_days_by_invoice_count[0]
+    assert_equal "Wednesday", @sa.top_days_by_invoice_count[0]
   end
 
 
   def test_merchants_with_only_one_item
     assert_instance_of Array, @sa.merchants_with_only_one_item
     assert_instance_of Merchant, @sa.merchants_with_only_one_item[0]
-    assert_equal 9, @sa.merchants_with_only_one_item.count
+    assert_equal 243, @sa.merchants_with_only_one_item.count
   end
 
   def test_merchants_with_only_one_item_registered_in_a_month
@@ -109,7 +109,6 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_pending_invoices
-
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
     assert_instance_of Array, @sa.merchants_with_pending_invoices
   end
@@ -117,11 +116,11 @@ class SalesAnalystTest < Minitest::Test
   def test_merchants_with_only_one_item_registered_in_month
     assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March")[0]
     assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("March")
-    assert_equal 10, @sa.merchants_with_only_one_item_registered_in_month("March").count
+    assert_equal 21, @sa.merchants_with_only_one_item_registered_in_month("March").count
   end
 
   def test_revenue_for_merchant
-    assert_equal 23000, @sa.revenue_by_merchant(12334105)
+    assert_instance_of BigDecimal, @sa.revenue_by_merchant(12334105)
   end
 
   def test_most_sold_item_for_merchant_returns_the_most_sold_item

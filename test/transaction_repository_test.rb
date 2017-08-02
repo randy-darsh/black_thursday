@@ -52,4 +52,9 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 1, @tr.find_all_by_result("success").first.id
   end
 
+  def test_find_all_unsuccessful_transactions
+    assert_instance_of Transaction, find_all_unsuccessful_transaction[0]
+    assert_equal 32, @tr.find_all_unsuccessful_transaction.count
+  end
+
 end
