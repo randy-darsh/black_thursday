@@ -6,6 +6,8 @@ require 'minitest/autorun'
 require 'minitest/emoji'
 require 'bigdecimal'
 require 'pry'
+require_relative '../lib/math_module'
+require_relative '../lib/merchant_analysis'
 
 class SalesAnalystTest < Minitest::Test
   def setup
