@@ -65,7 +65,7 @@ class SalesAnalystTest < Minitest::Test
   def test_top_merchants_by_invoice_count
     assert_instance_of Array, @sa.top_merchants_by_invoice_count
     assert_instance_of Merchant, @sa.top_merchants_by_invoice_count[0]
-    assert_equal 3, @sa.top_merchants_by_invoice_count.count
+    assert_equal 12, @sa.top_merchants_by_invoice_count.count
   end
 
   def test_bottom_merchants_by_invoice_count
