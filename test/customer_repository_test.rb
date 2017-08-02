@@ -25,9 +25,8 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 1000, @c.all.count
   end
 
-  def find_by_id
+  def test_find_by_id
     assert_instance_of Customer, @c.find_by_id(6)
-    assert_equal 5, @c.find_by_id(6).count
   end
 
   def test_find_all_by_first_name
