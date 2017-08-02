@@ -24,8 +24,7 @@ class Merchant
     invoices = @merch_repo.sales_engine.invoices.find_all_by_merchant_id(@id)
     customers = invoices.map do |invoice|
       @merch_repo.sales_engine.customers.find_by_id(invoice.customer_id)
-    end
-    customers.uniq
+    end.uniq
   end
 
   def succesful_invoices
@@ -50,12 +49,8 @@ class Merchant
     invoices_in_month = invoices.find_all do |invoice|
       invoice.created_at.strftime("%B") == month
     end
-
-    if invoices_in_month.count == 1
-      return true
-    else
-      false
-    end
+    return true if invoices_in_month.count == 1
+    false
   end
 
 end
