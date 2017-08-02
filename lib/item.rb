@@ -32,4 +32,7 @@ class Item
     @item_repo.sales_engine.merchants.find_by_id(@merchant_id)
   end
 
+  def number_sold
+    invoice_items
+  end
 end
