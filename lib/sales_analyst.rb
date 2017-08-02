@@ -67,7 +67,7 @@ class SalesAnalyst
 
   def total_revenue_by_date(date)
     invoices_by_date(date).inject(0) do |sum, invoice|
-      sum += invoice.total
+      sum + invoice.total
     end
   end
 
