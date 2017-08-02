@@ -11,8 +11,8 @@ class InvoiceItemRepository
 
   def initialize(invoice_items, se)
     @invoice_items = open_csv(invoice_items)
-    @se = se
-    @all = @invoice_items.map do |row|
+    @se            = se
+    @all           = @invoice_items.map do |row|
       InvoiceItem.new(row, self)
     end
   end
@@ -38,9 +38,4 @@ class InvoiceItemRepository
       invoice_item.invoice_id == invoice_id
     end
   end
-
-
-
-
-
 end

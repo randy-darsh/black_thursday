@@ -12,12 +12,12 @@ class ItemTest < Minitest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-              :items => "./test/data/items_fixture.csv",
-              :merchants => "./test/data/merchants_fixture.csv",
-              :invoice_items => "./test/data/invoice_items_fixture.csv",
-              :invoices => "./test/data/invoices_fixture.csv",
-              :transactions => "./test/data/transactions_fixture.csv",
-              :customers => "./test/data/customers_fixture.csv"
+              :items => "./data/items.csv",
+              :merchants => "./data/merchants.csv",
+              :invoice_items => "./data/invoice_items.csv",
+              :invoices => "./data/invoices.csv",
+              :transactions => "./data/transactions.csv",
+              :customers => "./data/customers.csv"
             })
 
     @item = Item.new({
@@ -54,7 +54,7 @@ class ItemTest < Minitest::Test
   def test_merchant_returns_the_merchant_of_the_item
     item_instance = @se.items.find_by_id(263395237)
     assert_instance_of Merchant, item_instance.merchant
+    assert_equal "jejum", item_instance.merchant.name
   end
-
 
 end

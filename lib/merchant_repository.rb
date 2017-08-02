@@ -10,9 +10,9 @@ class MerchantRepository
               :all
 
   def initialize(csv_data, sales_engine)
-    @sales_engine = sales_engine
+    @sales_engine      = sales_engine
     @all_merchant_data = open_csv(csv_data)
-    @all = @all_merchant_data.map do |row|
+    @all               = @all_merchant_data.map do |row|
       Merchant.new(row, self)
     end
   end
@@ -35,7 +35,7 @@ class MerchantRepository
 
   def find_all_by_name(name)
     @all.find_all do |merchant|
-      (/#{name}/i) =~ merchant.name
+      /#{name}/i =~ merchant.name
     end
   end
 

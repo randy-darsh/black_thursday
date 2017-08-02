@@ -11,8 +11,8 @@ class TransactionRepository
 
   def initialize(transactions, sales_engine)
     @transactions = open_csv(transactions)
-    @se = sales_engine
-    @all = @transactions.map do |row|
+    @se           = sales_engine
+    @all          = @transactions.map do |row|
       Transaction.new(row, self)
     end
   end

@@ -10,12 +10,12 @@ require 'pry'
 class SalesAnalystTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
-              :items => "./test/data/items_fixture.csv",
-              :merchants => "./test/data/merchants_fixture.csv",
-              :invoice_items => "./test/data/invoice_items_fixture.csv",
-              :invoices => "./test/data/invoices_fixture.csv",
-              :transactions => "./test/data/transactions_fixture.csv",
-              :customers => "./test/data/customers_fixture.csv"
+              :items => "./data/items.csv",
+              :merchants => "./data/merchants.csv",
+              :invoice_items => "./data/invoice_items.csv",
+              :invoices => "./data/invoices.csv",
+              :transactions => "./data/transactions.csv",
+              :customers => "./data/customers.csv"
             })
     @sa = SalesAnalyst.new(@se)
   end
@@ -61,13 +61,11 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_top_merchants_by_invoice_count
-    skip
     assert_instance_of Array, @sa.top_merchants_by_invoice_count
     assert_instance_of Merchant, @sa.top_merchants_by_invoice_count[0]
   end
 
   def test_bottom_merchants_by_invoice_count
-    skip
     assert_instance_of Array, @sa.top_merchants_by_invoice_count
     assert_equal 2, @sa.top_merchants_by_invoice_count[0]
   end
@@ -89,7 +87,6 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_only_one_item_registered_in_a_month
-    skip
     assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("January")
     assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January")
     assert_equal 5, @sa.merchants_with_only_one_item_registered_in_month("January")
@@ -118,14 +115,12 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_merchants_with_only_one_item_registered_in_month
-    skip
     assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March")[0]
     assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("March")
     assert_equal 10, @sa.merchants_with_only_one_item_registered_in_month("March").count
   end
 
   def test_revenue_for_merchant
-    skip
     assert_equal 23000, @sa.revenue_by_merchant(12334105)
   end
 
