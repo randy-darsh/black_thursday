@@ -35,5 +35,4 @@ class Item
   def number_sold
     invoice_items
   end
-
 end

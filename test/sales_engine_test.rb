@@ -10,12 +10,12 @@ class SalesEngineTest < Minitest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-              :items => "./test/data/items_fixture.csv",
-              :merchants => "./test/data/merchants_fixture.csv",
-              :invoice_items => "./test/data/invoice_items_fixture.csv",
-              :invoices => "./test/data/invoices_fixture.csv",
-              :transactions => "./test/data/transactions_fixture.csv",
-              :customers => "./test/data/customers_fixture.csv"
+              :items => "./data/items.csv",
+              :merchants => "./data/merchants.csv",
+              :invoice_items => "./data/invoice_items.csv",
+              :invoices => "./data/invoices.csv",
+              :transactions => "./data/transactions.csv",
+              :customers => "./data/customers.csv"
             })
   end
 
@@ -29,6 +29,22 @@ class SalesEngineTest < Minitest::Test
 
   def test_it_has_a_merchant_repository
     assert_instance_of MerchantRepository, @se.merchants
+  end
+
+  def test_it_has_an_invoice_repository
+    assert_instance_of InvoiceRepository, @se.invoices
+  end
+
+  def test_it_has_an_invoice_items_repository
+    assert_instance_of InvoiceItemRepository, @se.invoice_items
+  end
+
+  def test_it_has_a_transactions_repository
+    assert_instance_of TransactionRepository, @se.transactions
+  end
+
+  def test_it_has_a_customer_repository
+    assert_instance_of CustomerRepository, @se.customers
   end
 
 end

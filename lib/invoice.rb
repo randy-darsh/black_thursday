@@ -25,9 +25,10 @@ class Invoice
   def items
     invoice_items =
     @invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
-    items = invoice_items.map do |invoice_item|
+    invoice_items.map do |invoice_item|
       @invoice_repo.sales_engine.items.find_by_id(invoice_item.item_id)
     end
+    invoice_items
   end
 
   def transactions
@@ -48,17 +49,13 @@ class Invoice
   def total
     invoice_items =
     invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(@id)
-    total = invoice_items.inject(0) do |result, invoice_item|
-      result += (invoice_item.unit_price * invoice_item.quantity)
+    invoice_items.inject(0) do |result, invoice_item|
+      result + (invoice_item.unit_price * invoice_item.quantity)
     end
   end
 
   def invoice_items
     @invoice_repo.sales_engine.invoice_items.find_all_by_invoice_id(id)
   end
-
-
-
-
 
 end

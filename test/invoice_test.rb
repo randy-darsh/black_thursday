@@ -11,12 +11,12 @@ require 'minitest/emoji'
 class InvoiceTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
-              :items => "./test/data/items_fixture.csv",
-              :merchants => "./test/data/merchants_fixture.csv",
-              :invoice_items => "./test/data/invoice_items_fixture.csv",
-              :invoices => "./test/data/invoices_fixture.csv",
-              :transactions => "./test/data/transactions_fixture.csv",
-              :customers => "./test/data/customers_fixture.csv"
+              :items => "./data/items.csv",
+              :merchants => "./data/merchants.csv",
+              :invoice_items => "./data/invoice_items.csv",
+              :invoices => "./data/invoices.csv",
+              :transactions => "./data/transactions.csv",
+              :customers => "./data/customers.csv"
             })
     @i = Invoice.new({
               :id          => 6,
@@ -39,12 +39,11 @@ class InvoiceTest < Minitest::Test
     assert_instance_of Time, @i.updated_at
   end
 
-  def test_merchant
+  def test_merchant_exists
     assert_instance_of Merchant, @invoice.merchant
   end
 
   def test_invoice_items_returns_an_array_of_items
-    skip #items_fixture_doesn't match all invoice_items
     invoice = @se.invoices.find_by_id(14)
     assert_instance_of Array, invoice.items
     assert_instance_of InvoiceItem, invoice.items[0]

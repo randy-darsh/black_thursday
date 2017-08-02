@@ -1,3 +1,5 @@
+require 'time'
+require 'date'
 
 class Merchant
 
@@ -41,7 +43,7 @@ class Merchant
 
   def revenue_for_merchant
     succesful_invoices.inject(0) do |sum, invoice|
-      sum += invoice.total
+      sum + invoice.total
     end
   end
 

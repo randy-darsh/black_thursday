@@ -11,12 +11,12 @@ require 'minitest/emoji'
 class InvoiceItemTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
-              :items => "./test/data/items_fixture.csv",
-              :merchants => "./test/data/merchants_fixture.csv",
-              :invoice_items => "./test/data/invoice_items_fixture.csv",
-              :invoices => "./test/data/invoices_fixture.csv",
-              :transactions => "./test/data/transactions_fixture.csv",
-              :customers => "./test/data/customers_fixture.csv"
+              :items => "./data/items.csv",
+              :merchants => "./data/merchants.csv",
+              :invoice_items => "./data/invoice_items.csv",
+              :invoices => "./data/invoices.csv",
+              :transactions => "./data/transactions.csv",
+              :customers => "./data/customers.csv"
             })
     @ii = InvoiceItem.new({
               :id => 6,
@@ -43,9 +43,9 @@ class InvoiceItemTest < Minitest::Test
     assert_instance_of Time, @ii.updated_at
   end
 
-  def test_find_all_by_item_id
-
+  def test_it_has_unit_price_to_dollars
+    assert_instance_of BigDecimal, @ii.unit_price_to_dollars
+    assert_equal 0.11, @ii.unit_price_to_dollars.round(2)
   end
-
 
 end
