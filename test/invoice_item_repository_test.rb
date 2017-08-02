@@ -10,12 +10,12 @@ require 'bigdecimal'
 class InvoiceItemRepositoryTest < Minitest::Test
   def setup
     @se = SalesEngine.from_csv({
-              :items => "./test/data/items_fixture.csv",
-              :merchants => "./test/data/merchants_fixture.csv",
-              :invoice_items => "./test/data/invoice_items_fixture.csv",
-              :invoices => "./test/data/invoices_fixture.csv",
-              :transactions => "./test/data/transactions_fixture.csv",
-              :customers => "./test/data/customers_fixture.csv"
+              :items => "./data/items.csv",
+              :merchants => "./data/merchants.csv",
+              :invoice_items => "./data/invoice_items.csv",
+              :invoices => "./data/invoices.csv",
+              :transactions => "./data/transactions.csv",
+              :customers => "./data/customers.csv"
             })
     @iir = @se.invoice_items
   end
@@ -26,7 +26,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_all_returns_all_known_invoice_item_instances
     assert_instance_of Array, @iir.all
-    assert_equal 58, @iir.all.count
+    assert_equal 21830, @iir.all.count
   end
 
   def test_find_by_id
@@ -35,7 +35,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_find_all_by_item_id
     assert_instance_of Array, @iir.find_all_by_item_id(263519844)
-    assert_equal 1, @iir.find_all_by_item_id(263519844).count
+    assert_equal 164, @iir.find_all_by_item_id(263519844).count
   end
 
   def test_find_all_by_invoice_id

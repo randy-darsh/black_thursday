@@ -41,7 +41,7 @@ class InvoiceRepository
 
   def find_all_by_status(status)
     @all.find_all do |invoice|
-      (/#{status}/i) =~ invoice.status
+      /#{status}/i =~ invoice.status
     end
   end
 

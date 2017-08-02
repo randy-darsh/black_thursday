@@ -11,8 +11,8 @@ class CustomerRepository
 
   def initialize(customers, sales_engine)
     @customers = open_csv(customers)
-    @se = sales_engine
-    @all = @customers.map do |row|
+    @se        = sales_engine
+    @all       = @customers.map do |row|
       Customer.new(row, self)
     end
   end
@@ -29,13 +29,13 @@ class CustomerRepository
 
   def find_all_by_first_name(first_name)
     @all.find_all do |customer|
-      (/#{first_name}/i) =~ customer.first_name
+      /#{first_name}/i =~ customer.first_name
     end
   end
 
   def find_all_by_last_name(last_name)
     @all.find_all do |customer|
-      (/#{last_name}/i) =~ customer.last_name
+      /#{last_name}/i =~ customer.last_name
     end
   end
 

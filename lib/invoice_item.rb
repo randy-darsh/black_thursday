@@ -24,8 +24,4 @@ class InvoiceItem
     var/100
   end
 
-
-
-
-
 end

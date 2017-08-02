@@ -1,3 +1,5 @@
+require 'time'
+require 'date'
 
 class Merchant
 
@@ -42,7 +44,7 @@ class Merchant
 
   def revenue_for_merchant
     succesful_invoices.inject(0) do |sum, invoice|
-      sum += invoice.total
+      sum + invoice.total
     end
   end
 
@@ -50,7 +52,6 @@ class Merchant
     invoices_in_month = invoices.find_all do |invoice|
       invoice.created_at.strftime("%B") == month
     end
-
     if invoices_in_month.count == 1
       return true
     else

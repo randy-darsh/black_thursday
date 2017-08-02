@@ -10,9 +10,9 @@ class ItemRepository
               :all
 
   def initialize(csv_data, sales_engine)
-    @sales_engine = sales_engine
+    @sales_engine  = sales_engine
     @all_item_data = open_csv(csv_data)
-    @all = @all_item_data.map do |row|
+    @all           = @all_item_data.map do |row|
       Item.new(row, self)
     end
   end
