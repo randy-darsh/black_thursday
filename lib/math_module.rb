@@ -32,8 +32,8 @@ module MathModule
   end
 
   def sum_of_prices(merchant)
-    sum_of_prices = merchant.items.inject(0) do |sum, item|
-      sum += item.unit_price_to_dollars
+    merchant.items.inject(0) do |sum, item|
+      sum + item.unit_price_to_dollars
     end
   end
 
@@ -58,8 +58,8 @@ module MathModule
 
   def average_sales_per_day_standard_deviation
     mean = average_sales_per_day
-    sum = @day_count.values.reduce(0){|sum, num| sum + (num - mean)**2}
-    Math.sqrt(sum / 6).round(2)
+    count = @day_count.values.reduce(0) { |sum, num| sum + (num - mean)**2}
+    Math.sqrt(count / 6).round(2)
   end
 
   def calculate_invoice_percentage
