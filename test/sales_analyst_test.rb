@@ -65,11 +65,13 @@ class SalesAnalystTest < Minitest::Test
   def test_top_merchants_by_invoice_count
     assert_instance_of Array, @sa.top_merchants_by_invoice_count
     assert_instance_of Merchant, @sa.top_merchants_by_invoice_count[0]
+    assert_equal 3, @sa.top_merchants_by_invoice_count.count
   end
 
   def test_bottom_merchants_by_invoice_count
-    assert_instance_of Array, @sa.top_merchants_by_invoice_count
-    assert_equal 2, @sa.top_merchants_by_invoice_count[0]
+    assert_instance_of Array, @sa.bottom_merchants_by_invoice_count
+    assert_instance_of Merchant, @sa.bottom_merchants_by_invoice_count[0]
+    assert_equal 4, @sa.bottom_merchants_by_invoice_count.count
   end
 
   def test_turn_date_to_day
@@ -90,8 +92,8 @@ class SalesAnalystTest < Minitest::Test
 
   def test_merchants_with_only_one_item_registered_in_a_month
     assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("January")
-    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January")
-    assert_equal 5, @sa.merchants_with_only_one_item_registered_in_month("January")
+    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("January")[0]
+    assert_equal 19, @sa.merchants_with_only_one_item_registered_in_month("January").count
   end
 
   def test_revenue_by_date
@@ -115,18 +117,13 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of Array, @sa.merchants_with_pending_invoices
   end
 
-  def test_merchants_with_only_one_item_registered_in_month
-    assert_instance_of Merchant, @sa.merchants_with_only_one_item_registered_in_month("March")[0]
-    assert_instance_of Array, @sa.merchants_with_only_one_item_registered_in_month("March")
-    assert_equal 21, @sa.merchants_with_only_one_item_registered_in_month("March").count
-  end
-
   def test_revenue_for_merchant
     assert_instance_of BigDecimal, @sa.revenue_by_merchant(12334105)
   end
 
   def test_most_sold_item_for_merchant_returns_the_most_sold_item
-    assert_instance_of Item, @sa.most_sold_item_for_merchant(12334105)
+    item = @sa.most_sold_item_for_merchant(12334105).count
+    assert_equal 5, item
   end
 
 end

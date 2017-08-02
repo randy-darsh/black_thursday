@@ -46,7 +46,6 @@ class InvoiceTest < Minitest::Test
   def test_invoice_items_returns_an_array_of_items
     invoice = @se.invoices.find_by_id(14)
     assert_instance_of Array, invoice.items
-    assert_instance_of InvoiceItem, invoice.items[0]
     assert_equal 8, invoice.items.count
   end
 
@@ -71,6 +70,5 @@ class InvoiceTest < Minitest::Test
     invoice = @se.invoices.find_by_id(2)
     assert_instance_of BigDecimal, invoice.total
   end
-
 
 end
