@@ -281,7 +281,6 @@ class SalesAnalyst
   def best_item_for_merchant(merch_id)
     best_item = Hash.new(0)
     merchant = @se.merchants.find_by_id(merch_id)
-
     merchant.succesful_invoices.map do |invoice|
       invoice.invoice_items.map do |invoice_item|
         best_item[invoice_item.item_id] +=
